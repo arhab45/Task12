@@ -1,22 +1,16 @@
-<?php
-    class Barang{
-        private $dbh;
-        public function __construct($dbh){
-            $this->dbh = $dbh;
-        }
+<?php 
+    $dbhost="localhost";
+    $dbname="db_latihan3";
+    $dbuser="root";
+    $dbpass="";
+    
+    $dsn="mysql:host=$dbhost;dbname=$dbname";
 
-        public function dataBarang(){
-            $sql="SELECT * FROM Barang";
-            $rs = $this->dbh->query($sql);
-            return $rs;
-        }
-        
-        public function getAllJenis(){
-            $sql = "SELECT * FROM jenis_barang";
-            // fungsi query, eksekusi query dan ambil datanya
-            $rs = $this->dbh->query($sql); 
-            return $rs;
-        } 
-        
+    try {
+        $dbh = new PDO($dsn, $dbuser, $dbpass);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    } catch (PDOException $e){
+        echo 'Connection Failed : '.$e->getMessage();
     }
 ?>
